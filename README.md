@@ -1,6 +1,6 @@
 # codebits-tv
 
-![codebits-tv](docs/icon.png)
+![codebits-tv](docs/icon-256.png)
 
 This is a completely off the wall experiment in streaming generated video frames over multicast UDP, heavily inspired by three (or was it four?) generations of digital signage solutions I hacked together for Codebits/PixelsCamp events over the years.
 
