@@ -51,12 +51,9 @@ Run examples (in separate terminals):
 
 - The server encodes frames at ~5 FPS using JPEG with a timestamp overlay.
 - The multicast framing uses a 4-byte length prefix when possible; the proxy understands this framing.
-
 - If the proxy logs warnings about joining the multicast group, specify the correct interface with `-if`.
 - On macOS use `ifconfig` to find candidate interfaces (e.g. `en0`); on Linux use `ip link`.
-
 - The proxy also serves a small HTML viewer at `/` that embeds the MJPEG stream.
-- Both server and proxy support graceful shutdown on SIGINT (Ctrl+C).
 
 Performance & Notes:
 
@@ -64,8 +61,5 @@ Performance & Notes:
 - JPEG quality (`-quality`): controls the JPEG encoder quality (1-100). Lower values reduce bandwidth at the cost of visual fidelity and may speed up encoding.
 - Proxy viewer: the HTML viewer at `/` scales the MJPEG image to fill the browser viewport while preserving aspect ratio (no stretching). The image will be letterboxed/pillarboxed as needed.
 - Tuning: if CPU is a concern, reduce `-fade`, reduce the `-quality`, or lower the output resolution in `internal/frame`.
-
-- Send behavior: by default the server only multicasts when the encoded frame bytes differ from the previous one (this includes frames produced by fades). There is no `-send-on-change` flag — this is the default behavior.
+- Send behavior: by default the server only multicasts when the encoded frame bytes differ from the previous one (this includes frames produced by fades). 
 - Timestamp overlay: the timestamp is off by default. Enable it with the `-timestamp` flag when starting the server.
-
-If you'd like runtime control over `fade`/`quality` (HTTP admin endpoint) or further optimizations (buffer reuse, configurable worker count), I can add those next.
