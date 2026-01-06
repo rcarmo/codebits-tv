@@ -2,13 +2,24 @@
 
 ![codebits-tv](docs/icon.png)
 
-This is a completely off the wall experiment in streaming generated video frames over multicast UDP, heavily inspired by three generations of digital signage solutions I hacked together for Codebits/PixelsCamp events over the years.
+This is a completely off the wall experiment in streaming generated video frames over multicast UDP, heavily inspired by three (or was it four?) generations of digital signage solutions I hacked together for Codebits/PixelsCamp events over the years.
 
 > Hat tip to [@chbm](https://github.com/chbm) for the name
 
 Stay tuned for the ESP32 version!
 
-## Tools:
+## Screenshot
+
+```bash
+./bin/server -slides /Users/rcarmo/Pictures/Samurai\ Jack -slide-interval 5  -quality 70 -geometry 1280x720
+
+2026/01/06 20:34:17 frame: bytes=103594 fragments=87 bytes_on_wire=106813 repeats=1 inst=0.000 Mbps ewma=0.000 Mbps
+2026/01/06 20:34:22 frame: bytes=57817 fragments=49 bytes_on_wire=59630 repeats=1 inst=0.100 Mbps ewma=0.100 Mbps
+2026/01/06 20:34:27 frame: bytes=99920 fragments=84 bytes_on_wire=103028 repeats=1 inst=0.163 Mbps ewma=0.103 Mbps
+2026/01/06 20:34:32 frame: bytes=38210 fragments=33 bytes_on_wire=39431 repeats=1 inst=0.061 Mbps ewma=0.101 Mbps
+```
+
+## Tools
 
 - `server`: generates 5 FPS JPEG frames and multicasts them on the LAN.
 - `proxy`: joins the multicast group and exposes an MJPEG HTTP endpoint and a small viewer at `/`.
@@ -36,7 +47,7 @@ Run examples (in separate terminals):
 ./bin/server -slides "/path/to/slides" -slide-interval 5 -fade 2 -quality 70
 ```
 
-## Notes:
+## Notes
 
 - The server encodes frames at ~5 FPS using JPEG with a timestamp overlay.
 - The multicast framing uses a 4-byte length prefix when possible; the proxy understands this framing.

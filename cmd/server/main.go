@@ -7,9 +7,9 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"math"
 	"mjpeg-multicast/internal/frame"
 	"mjpeg-multicast/internal/mcast"
-	"math"
 	"os"
 	"os/signal"
 	"time"
@@ -110,9 +110,7 @@ func main() {
 				fragments := (payloadLen + payloadPer - 1) / payloadPer
 				bytesOnWire := payloadLen + fragments*(fragHeader+ipUdpOverhead)
 				bytesWithRepeats := bytesOnWire * (*repeats)
-				fps := 5.0
-				bps := float64(bytesWithRepeats) * fps * 8.0
-				mbps := bps / 1e6
+				// fps is the ticker frequency (5Hz); we compute instant bps from actual send interval below
 				// compute instant bps using delta time since last send
 				now := time.Now()
 				var instBps float64
