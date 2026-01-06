@@ -1,0 +1,24 @@
+# Binaries
+/bin/
+/bin/*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Go build
+*.exe
+*.test
+
+# Temp files
+*.log
+
+# Misc
+coverage.out
